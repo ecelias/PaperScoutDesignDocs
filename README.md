@@ -1,6 +1,8 @@
 # A One Page Project Doc
 
-_One paragraph project description. This should describe the goal you're trying to accomplish._
+Design a web application which updates users daily/weekly with a specified number of recently published literature in their fields and provide AI-generated summaries of each article. 
+
+Secondary Project Goals: Provide features to teach young researchers about literature search strategies and provide an option to see the search strategy used for each update.
 
 # Planning
 
