@@ -1,4 +1,4 @@
-# A One Page Project Doc
+# PaperScout.ai
 
 Design a web application which updates users daily/weekly with a specified number of recently published literature in their fields and provide AI-generated summaries of each article. 
 
