@@ -88,7 +88,7 @@ _Describe tools (IDE, Debugger, build tools, test framework) you'll use in the p
 
 ## System
 
-_A block diagram for the entire system._
+[_A block diagram for the entire system._](https://lucid.app/lucidspark/e1823555-cdeb-45ad-8428-7f2e0a14201f/edit?viewport_loc=-29227%2C-21601%2C42106%2C22919%2C0_0&invitationId=inv_69b36c56-aca1-45ce-9582-d90805876f74)
 
 ## Units
 
