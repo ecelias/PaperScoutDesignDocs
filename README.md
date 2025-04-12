@@ -25,7 +25,7 @@ Secondary Project Goals: Provide features to teach young researchers about liter
 
 ## Tasks
 
-_Describe how work is partitioned and distributed._
+All work is to be completed by Elizabeth Elias. 
 
 ## Version control
 
