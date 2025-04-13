@@ -108,7 +108,7 @@ _Describe tools (IDE, Debugger, build tools, test framework) you'll use in the p
 
 ## Units
 
-### Unit: Title
+### Unit 1: Landing Page (Front End)
 
 #### Description
 _Describe the point of the unit_
@@ -121,11 +121,195 @@ _Include some diagrammatic description of the unit. A class diagram? A sequence 
 
 _List the unit tests for this unit_
 
+### Unit 2: About App Page (Front End)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+### Unit 3: About Developer Page (Front End)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+### Unit 4: Sign Up Page (Front End)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+### Unit 5: Login Page (Front End)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+### Unit 6: User Dashboard (Front End)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+### Unit 7: User Profile (Front End)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+### Unit 8: Search History Page (Front End)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+### Unit 9: New Query Page (Front End)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+### Unit 10: Previous Search Page (Front End)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+### Unit 11: User Database (Backend, Databases)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 12: User Feedback Database (Backend, Databases)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 13: Search History Database (Backend, Databases)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 14: Scheduler Database (Backend, Databases)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
 .
 .
 .
 
-### Unit n: Title
+### Unit n: 
 
 #### Description
 _Describe the point of the unit_
