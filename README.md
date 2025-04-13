@@ -101,7 +101,8 @@ _Describe tools (IDE, Debugger, build tools, test framework) you'll use in the p
 
 ## System
 
-![Use case diagram](https://github.com/user-attachments/assets/19b2a9dc-da9a-49bf-9893-b588823a224c)
+![Use case diagram (1)](https://github.com/user-attachments/assets/651c543f-866b-4b27-98de-2b96ac447467)
+
 
 ![Concept map creation worksheet - Color](https://github.com/user-attachments/assets/3109cdbc-ed5a-4eb5-b7a0-74ffd06a60d6)
 
