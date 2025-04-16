@@ -305,11 +305,8 @@ _List the unit tests for this unit_
 # Integration tests
 
 _List the integration tests for the system._
-.
-.
-.
 
-### Unit n: 
+### Unit 15: Dashboard Interactivity (Backend, User Workflow)
 
 #### Description
 _Describe the point of the unit_
@@ -326,6 +323,260 @@ _List the unit tests for this unit_
 
 _List the integration tests for the system._
 
+### Unit 16: Dashboard Display (Backend, User Workflow)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 17: User Login (Backend, User Workflow)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 18: User Sign Up (Backend, User Workflow)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 19: New Query (Backend, User Workflow)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 20: User Profile (Backend, User Workflow)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 21: Search History (Backend, User Workflow)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 22: User Feedback (Backend, User Workflow)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 23: Update Notifications (Backend, Messaging)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 24: PubMed API (Backend, API)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 25: PubMed API (Backend, API)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 26: arXIV API (Backend, API)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 27: Article Selection & Summarization (Backend, API/AI/Messaging)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 28: Search Query Optomization (Backend, AI Integration)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 29: Update Formatting (Backend, Messaging)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
+
+### Unit 30: Admin Capabilities (Backend)
+
+#### Description
+_Describe the point of the unit_
+
+#### Diagrams
+
+_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+
+#### Unit test description
+
+_List the unit tests for this unit_
+
+# Integration tests
+
+_List the integration tests for the system._
 
 # Resources
 
