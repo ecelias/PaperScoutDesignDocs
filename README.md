@@ -59,9 +59,9 @@ The goal of this project is to provide the design documents to turn this into a 
 ### Unit testing
 
 #### Frontend (React-based):
-    * Use Jest and React Testing Library to test component rendering and interactability
-    * Mock API responses and user actions
-    * Validate routing, form inputs, conditional rendering, and responsiveness
+    _* Use Jest and React Testing Library to test component rendering and interactability
+    _* Mock API responses and user actions
+    _* Validate routing, form inputs, conditional rendering, and responsiveness
 
 ### Integration testing
 
