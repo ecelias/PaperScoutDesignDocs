@@ -251,7 +251,7 @@ Version Control: Git, GitHub <p>
 Debugger: VSCode Debug Console, [ipdb](https://pypi.org/project/ipdb/) <p>
 Dev Tools: [Chrome Dev Tools](https://developer.chrome.com/docs/devtools) <p>
 Messaging:[Email with Postmark](https://postmarkapp.com/lp/postmark-email-api?utm_source=google&utm_medium=cpc&utm_campaign=Postmark_Google_Search_Non_NORTHAM&utm_adgroup=Dev_Languages&utm_term=python%20email&gad_source=1&gclid=Cj0KCQjwqv2_BhC0ARIsAFb5Ac9cp3TYZI4Ws19WmbI7WXwAd84Z6FkKoe-2NpT0yE0HgDHyZPZKHuUaAqMoEALw_wcB), [SMS with Plivo](https://www.plivo.com/) <p>
-Task Scheduler: [Celery](https://github.com/celery/celery), [Redis](https://github.com/redis/redis-py) <p>
+Task Scheduler: [CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) <p>
 External APIs: [PubMed E-utilities](https://www.ncbi.nlm.nih.gov/books/NBK3837/), [arXIV API](https://info.arxiv.org/help/api/index.html), [OpenAI GPT-4](https://openai.com/index/gpt-4-api-general-availability/) <p>
 Testing Frameworks:
 * Frontend Unit Testing: [Jest](https://jestjs.io/), [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) 
@@ -284,6 +284,8 @@ Summarizes PaperScout.ai and directs users to log-in or sign up.
 
 #### Diagrams
 
+```mermaid
+```
 Sequence Diagram: User -> Browser -> React App -> Route Redirect
 
 #### Unit test description
@@ -300,6 +302,8 @@ Educates users about the app's goals, how it works, and its benefits to research
 
 #### Diagrams
 
+```mermaid
+```
 Class Diagram showing static content component tree
 
 #### Unit test description
@@ -315,6 +319,8 @@ Displays developer bio and contact information, possibly including GitHub or por
 
 #### Diagrams
 
+```mermaid
+```
 Class Diagram of static content
 
 #### Unit test description
@@ -330,6 +336,8 @@ Allows new users to create an account.
 
 #### Diagrams
 
+```mermaid
+```
 Sequence Diagram: User -> Signup Form -> API -> User DB
 
 #### Unit test description
@@ -347,6 +355,8 @@ Authenticates returning users.
 
 #### Diagrams
 
+```mermaid
+```
 State Machine: Logged Out -> Logging In -> Authenticated
 
 #### Unit test description
@@ -363,6 +373,8 @@ Central hub for viewing updates, saved searches, and navigating features.
 
 #### Diagrams
 
+```mermaid
+```
 Component Hierarchy (Dashboard, Update Feed, NavBar)
 
 #### Unit test description
@@ -378,6 +390,8 @@ Displays and allows editing of user preferences and scheduling options.
 
 #### Diagrams
 
+```mermaid
+```
 State Machine: View Mode <-> Edit Mode
 
 #### Unit test description
@@ -393,6 +407,8 @@ Lists user’s past queries and links to associated summaries. Also lists articl
 
 #### Diagrams
 
+```mermaid
+```
 Sequence Diagram: User -> UI -> Query DB
 
 #### Unit test description
@@ -410,6 +426,8 @@ Form for users to define and submit a new literature search.
 
 #### Diagrams
 
+```mermaid
+```
 Sequence Diagram: User -> Query Form -> API -> PubMed/arXiv
 
 #### Unit test description
@@ -425,6 +443,8 @@ Shows results for a selected previous query.
 
 #### Diagrams
 
+```mermaid
+```
 Component Hierarchy: Metadata + Summary Cards
 
 #### Unit test description
@@ -436,19 +456,44 @@ Component Hierarchy: Metadata + Summary Cards
 
 #### Description
 
-Stores user information including email, hashed password, preferences, and delivery schedule.
+Stores user information including email, hashed password, name, phone number
 
 #### Diagrams
 
-Class Diagram: User(id, email, password_hash, preferences, schedule)
-Sequence Diagram: SignUp/Login -> API -> User DB (SELECT/INSERT)
+```mermaid
+classDiagram
+    class User {
+        +int id
+        +string email
+        +string password_hash
+        +int phone_number
+        +string hash_password()
+        +string retrieve_user()
+    }
+```
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant UserDB
 
+    User->>Frontend: Submit SignUp/Login Form
+    Frontend->>API: Send User Credentials
+    alt New User
+        API->>UserDB: INSERT New User Record
+        UserDB-->>API: Confirmation
+    else Existing User
+        API->>UserDB: SELECT User Record
+        UserDB-->>API: User Data
+    end
+    API-->>Frontend: Authentication Response
+    Frontend-->>User: Display Result
+```
 #### Unit test description
 
-1. Insert new user
 2. Validate password hashing
 3. Retrieve user by email
-4. Update preferences
 
 ### Unit 12: User Feedback Database (Backend, Databases)
 
@@ -457,9 +502,30 @@ Sequence Diagram: SignUp/Login -> API -> User DB (SELECT/INSERT)
 Captures user-submitted feedback including satisfaction scores and suggestions for improvement.
 
 #### Diagrams
+```mermaid
+classDiagram
+    class Feedback {
+        +int id
+        +int user_id
+        +datetime timestamp
+        +int rating
+        +string comment
+    }
+```
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant FeedbackDB
 
-Class Diagram: Feedback(id, user_id, timestamp, rating, comment)
-Sequence Diagram: Submit Feedback -> API -> Feedback DB (INSERT)
+    User->>Frontend: Submit Feedback Form
+    Frontend->>API: Send Feedback Data
+    API->>FeedbackDB: INSERT Feedback Record
+    FeedbackDB-->>API: Confirmation
+    API-->>Frontend: Acknowledge Submission
+    Frontend-->>User: Display Confirmation Message
+```
 
 #### Unit test description
 
@@ -475,8 +541,30 @@ Logs all search queries made by a user, along with metadata and result summaries
 
 #### Diagrams
 
-Class Diagram: SearchHistory(id, user_id, query, timestamp, summary_ref)
-Sequence Diagram: Submit Query -> API -> Search History DB (INSERT)
+```mermaid
+classDiagram
+    class SearchHistory {
+        +int id
+        +int user_id
+        +string query
+        +datetime timestamp
+        +string summary_ref
+    }
+```
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant SearchHistoryDB
+
+    User->>Frontend: Submit Search Query
+    Frontend->>API: Send Query Data
+    API->>SearchHistoryDB: INSERT Search Record
+    SearchHistoryDB-->>API: Confirmation
+    API-->>Frontend: Acknowledge Submission
+    Frontend-->>User: Display Confirmation Message
+```
 
 #### Unit test description
 
@@ -492,8 +580,24 @@ Manages scheduling preferences for article updates (e.g., frequency, next update
 
 #### Diagrams
 
-Class Diagram: Scheduler(id, user_id, frequency, next_update, last_run)
-State Machine: Active -> Scheduled -> Triggered -> Updated
+```mermaid
+classDiagram
+    class Scheduler {
+        +int id
+        +int user_id
+        +string frequency
+        +datetime next_update
+        +datetime last_run
+    }
+```
+```mermaid
+stateDiagram-v2
+    [*] --> Active
+    Active --> Scheduled
+    Scheduled --> Triggered
+    Triggered --> Updated
+    Updated --> Scheduled
+```
 
 #### Unit test description
 
@@ -509,13 +613,26 @@ Handles user input on dashboard (e.g., feedback on articles, bookmarking, editin
 
 #### Diagrams
 
-Sequence Diagram: User -> Dashboard -> API -> DB Updates
+```mermaid
+sequenceDiagram
+    participant User
+    participant Dashboard
+    participant API
+    participant Database
+
+    User->>Dashboard: Interact (e.g., click 'Bookmark', submit feedback, edit settings)
+    Dashboard->>API: Send interaction data
+    API->>Database: Update relevant records
+    Database-->>API: Confirmation of update
+    API-->>Dashboard: Acknowledge update
+    Dashboard-->>User: Display confirmation message
+```
 
 #### Unit test description
 
 1. Save feedback from dashboard
-2. Bookmark an article
-3. Edit search preferences
+2. Access search history
+4. Edit search preferences
 
 ### Unit 16: Dashboard Display (Backend, User Workflow)
 
@@ -525,8 +642,58 @@ Populates the frontend dashboard with user-specific update summaries and profile
 
 #### Diagrams
 
-Class Diagram: DashboardData(UserInfo, UpdateSummaries, SchedulerInfo)
-Sequence Diagram: User -> Dashboard Load -> API -> DB Reads
+```mermaid
+classDiagram
+    class DashboardData {
+        +UserInfo user
+        +List~UpdateSummary~ updates
+        +SchedulerInfo schedule
+    }
+
+    class UserInfo {
+        +int id
+        +string email
+        +string preferences
+    }
+
+    class UpdateSummary {
+        +string title
+        +string summary
+        +string link
+        +datetime published_at
+        +vector display_search_history()
+        +void select_past_search()
+    }
+
+    class SchedulerInfo {
+        +string frequency
+        +datetime next_update
+        +datetime last_run
+        +datetime display_schedule()
+    }
+
+    DashboardData --> UserInfo
+    DashboardData --> UpdateSummary
+    DashboardData --> SchedulerInfo
+```
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant UserDB
+    participant SearchHistoryDB
+    participant SchedulerDB
+
+    User->>Frontend: Access Dashboard
+    Frontend->>API: Request Dashboard Data
+    API->>UserDB: Fetch UserInfo
+    API->>SearchHistoryDB: Fetch UpdateSummaries
+    API->>SchedulerDB: Fetch SchedulerInfo
+    API-->>Frontend: Return DashboardData
+    Frontend-->>User: Display Dashboard
+
+```
 
 #### Unit test description
 
@@ -542,8 +709,31 @@ Authenticates users using their credentials and manages session tokens.
 
 #### Diagrams
 
-Sequence Diagram: Login Request -> Auth Service -> Token Generation -> Response
-State Machine: Logged Out -> Auth Validated -> Logged In
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant AuthService
+    participant UserDB
+    participant TokenService
+
+    User->>Frontend: Enter credentials
+    Frontend->>AuthService: Send login request
+    AuthService->>UserDB: Verify credentials
+    UserDB-->>AuthService: Return user data
+    AuthService->>TokenService: Generate session token
+    TokenService-->>AuthService: Return token
+    AuthService-->>Frontend: Return token
+    Frontend-->>User: Grant access
+```
+```mermaid
+stateDiagram-v2
+    [*] --> LoggedOut
+    LoggedOut --> AuthValidating : Submit credentials
+    AuthValidating --> LoggedIn : Success
+    AuthValidating --> LoggedOut : Failure
+    LoggedIn --> LoggedOut : Logout
+```
 
 #### Unit test description
 
@@ -559,6 +749,28 @@ Registers new users and inserts their credentials and preferences into the syste
 
 #### Diagrams
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant UserDB
+
+    User->>Frontend: Fill and submit sign-up form
+    Frontend->>API: Send sign-up data
+    API->>UserDB: Check if email exists
+    alt Email exists
+        API-->>Frontend: Return error (Email already in use)
+        Frontend-->>User: Display error message
+    else Email does not exist
+        API->>API: Validate input fields
+        API->>API: Hash password
+        API->>UserDB: Insert new user record
+        UserDB-->>API: Confirm insertion
+        API-->>Frontend: Return success response
+        Frontend-->>User: Display success message
+    end
+```
 Sequence Diagram: Form Submit -> API -> User DB (INSERT)
 
 #### Unit test description
@@ -576,7 +788,28 @@ Takes new search queries, calls literature APIs, stores query, and returns resul
 
 #### Diagrams
 
-Sequence Diagram: Submit Query -> API -> PubMed/arXiv -> Summary + Store Query -> Return Results
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant PubMed
+    participant arXiv
+    participant SummaryService
+    participant SearchHistoryDB
+
+    User->>Frontend: Submit search query
+    Frontend->>API: Send query data
+    API->>PubMed: Request articles
+    API->>arXiv: Request articles
+    PubMed-->>API: Return articles
+    arXiv-->>API: Return articles
+    API->>SummaryService: Generate summaries
+    SummaryService-->>API: Return summaries
+    API->>SearchHistoryDB: Store query and metadata
+    API-->>Frontend: Return articles and summaries
+    Frontend-->>User: Display results
+```
 
 #### Unit test description
 
@@ -592,8 +825,29 @@ Manages user profile updates such as preferred fields, summary frequency, and co
 
 #### Diagrams
 
-Class Diagram: Profile(id, user_id, fields_of_interest, schedule)
-Sequence Diagram: View/Edit Profile -> API -> DB (SELECT/UPDATE)
+```mermaid
+classDiagram
+    class Profile {
+        +int id
+        +int user_id
+        +List~String~ fields_of_interest
+        +String schedule
+    }
+```
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant UserProfileDB
+
+    User->>Frontend: View/Edit Profile
+    Frontend->>API: Send profile request
+    API->>UserProfileDB: SELECT/UPDATE profile data
+    UserProfileDB-->>API: Return confirmation/data
+    API-->>Frontend: Return response
+    Frontend-->>User: Display updated profile
+```
 
 #### Unit test description
 
@@ -609,7 +863,20 @@ Retrieves a user's previous queries and associated metadata for display and re-u
 
 #### Diagrams
 
-Sequence Diagram: Dashboard -> API -> Search History DB -> Return past queries
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant SearchHistoryDB
+
+    User->>Frontend: Request search history
+    Frontend->>API: Fetch search history
+    API->>SearchHistoryDB: SELECT queries WHERE user_id = current_user ORDER BY timestamp DESC
+    SearchHistoryDB-->>API: Return query list
+    API-->>Frontend: Return search history data
+    Frontend-->>User: Display past queries
+```
 
 #### Unit test description
 
@@ -625,7 +892,20 @@ Collects and processes user feedback submitted through the interface.
 
 #### Diagrams
 
-Sequence Diagram: Feedback Form -> API -> Feedback DB
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant FeedbackDB
+
+    User->>Frontend: Submit feedback form
+    Frontend->>API: Send feedback data
+    API->>FeedbackDB: INSERT feedback (user_id, timestamp, rating, comment)
+    FeedbackDB-->>API: Acknowledge insertion
+    API-->>Frontend: Confirm feedback submission
+    Frontend-->>User: Display confirmation message
+```
 
 #### Unit test description
 
@@ -641,8 +921,28 @@ Sends update summaries via email or in-app notifications based on user schedules
 
 #### Diagrams
 
-Sequence Diagram: Cron Job -> Scheduler DB -> Generate Update -> Send Notification
-State Machine: Scheduled -> Triggered -> Sent
+```mermaid
+sequenceDiagram
+    participant CronJob
+    participant SchedulerDB
+    participant UpdateService
+    participant NotificationService
+    participant User
+
+    CronJob->>SchedulerDB: Fetch due schedules
+    SchedulerDB-->>CronJob: Return user schedules
+    CronJob->>UpdateService: Generate updates
+    UpdateService->>NotificationService: Send notifications
+    NotificationService->>User: Deliver update (email/SMS)
+    NotificationService->>SchedulerDB: Log notification status
+```
+```mermaid
+stateDiagram-v2
+    [*] --> Scheduled
+    Scheduled --> Triggered : Time reached
+    Triggered --> Sent : Notification dispatched
+    Sent --> [*]
+```
 
 #### Unit test description
 
@@ -658,7 +958,20 @@ Connects to PubMed to retrieve articles based on user-defined queries.
 
 #### Diagrams
 
-Sequence Diagram: Query -> API Wrapper -> PubMed -> Return Article Metadata
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant APIWrapper
+    participant PubMed
+
+    User->>Frontend: Submit search query
+    Frontend->>PubMedEUtilitiesAPIWrapper: Send query parameters
+    PubMedEUtilitiesAPIWrapper->>PubMed: Request articles
+    PubMed-->PubMedEUtilitiesAPIWrapper: Return article metadata
+    PubMedEUtilitiesAPIWrapper-->>Frontend: Deliver metadata
+    Frontend-->>User: Display search results
+```
 
 #### Unit test description
 
@@ -674,7 +987,20 @@ Interfaces with arXiv to retrieve relevant preprints matching user queries.
 
 #### Diagrams
 
-Sequence Diagram: Query -> arXiv Wrapper -> arXiv -> Parse + Return Metadata
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant arXivWrapper
+    participant arXiv
+
+    User->>Frontend: Submit search query
+    Frontend->>arXivAPIWrapper: Send query parameters
+    arXivAPIWrapper->>arXiv: Request preprints
+    arXiv-->>arXivAPIWrapper: Return XML response
+    arXivAPIWrapper-->>Frontend: Deliver parsed metadata
+    Frontend-->>User: Display search results
+```
 
 #### Unit test description
 
@@ -690,8 +1016,24 @@ Filters retrieved articles and generates concise, readable AI summaries for each
 
 #### Diagrams
 
-Sequence Diagram: API Response -> Summarizer Module -> Summary + Key Points
-State Machine: Raw Article -> Selected -> Summarized
+```mermaid
+sequenceDiagram
+    participant API
+    participant Summarizer
+    participant AIModel
+
+    API->>Summarizer: Receive article metadata
+    Summarizer->>AIModel: Send article content
+    AIModel-->>Summarizer: Return summary and key points
+    Summarizer-->>API: Deliver summarized articles
+```
+```mermaid
+stateDiagram-v2
+    [*] --> RawArticle
+    RawArticle --> Selected : Meets relevance criteria
+    Selected --> Summarized : Processed by AI summarizer
+    Summarized --> [*]
+```
 
 #### Unit test description
 
@@ -707,6 +1049,43 @@ Improves user queries via NLP techniques to enhance article retrieval relevance.
 
 #### Diagrams
 
+```mermaid
+classDiagram
+    class QueryOptimizer {
+        +optimizeQuery(query: String): String
+    }
+
+    class InputAnalyzer {
+        +analyze(query: String): List~String~
+    }
+
+    class SynonymExpander {
+        +expand(terms: List~String~): List~String~
+    }
+
+    QueryOptimizer --> InputAnalyzer
+    QueryOptimizer --> SynonymExpander
+```
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant QueryOptimizer
+    participant PubMed
+    participant arXiv
+
+    User->>Frontend: Enter search query
+    Frontend->>API: Submit query
+    API->>QueryOptimizer: Optimize query
+    QueryOptimizer->>API: Return optimized query
+    API->>PubMed: Query with optimized terms
+    API->>arXiv: Query with optimized terms
+    PubMed-->>API: Return articles
+    arXiv-->>API: Return articles
+    API-->>Frontend: Deliver search results
+    Frontend-->>User: Display articles
+```
 Class Diagram: QueryOptimizer(InputAnalyzer, SynonymExpander)
 Sequence Diagram: User Query -> Optimizer -> PubMed/arXiv
 
@@ -724,8 +1103,38 @@ Converts selected articles and summaries into a user-friendly update message for
 
 #### Diagrams
 
-Class Diagram: UpdateFormatter(TemplateEngine, MarkdownRenderer)
-Sequence Diagram: Summaries -> Formatter -> Email/In-app Payload
+```mermaid
+classDiagram
+    class UpdateFormatter {
+        +formatUpdate(summaries: List~Summary~): String
+    }
+
+    class TemplateEngine {
+        +render(template: String, data: Map): String
+    }
+
+    class MarkdownRenderer {
+        +toHTML(markdown: String): String
+    }
+
+    UpdateFormatter --> TemplateEngine
+    UpdateFormatter --> MarkdownRenderer
+```
+```mermaid
+sequenceDiagram
+    participant Summarizer
+    participant UpdateFormatter
+    participant TemplateEngine
+    participant MarkdownRenderer
+    participant NotificationService
+
+    Summarizer->>UpdateFormatter: Provide article summaries
+    UpdateFormatter->>MarkdownRenderer: Convert summaries to HTML
+    MarkdownRenderer-->>UpdateFormatter: Return HTML content
+    UpdateFormatter->>TemplateEngine: Apply template to HTML content
+    TemplateEngine-->>UpdateFormatter: Return formatted message
+    UpdateFormatter->>NotificationService: Send formatted update
+```
 
 #### Unit test description
 
@@ -741,8 +1150,45 @@ Provides admin-level tools for managing users, monitoring system usage, and upda
 
 #### Diagrams
 
-Class Diagram: AdminTools(UserManager, FeedbackReview, SchedulerOverride)
-State Machine: View -> Select User -> Take Action (Ban, Reschedule, Delete)
+```mermaid
+classDiagram
+    class AdminTools {
+        +UserManager userManager
+        +FeedbackReview feedbackReview
+        +SchedulerOverride schedulerOverride
+    }
+
+    class UserManager {
+        +banUser(userId: int): void
+        +deleteUser(userId: int): void
+        +viewUserLogs(userId: int): Log[]
+    }
+
+    class FeedbackReview {
+        +reviewFeedback(feedbackId: int): Feedback
+        +deleteFeedback(feedbackId: int): void
+    }
+
+    class SchedulerOverride {
+        +rescheduleUser(userId: int, newSchedule: Schedule): void
+        +overrideSchedule(userId: int): void
+    }
+
+    AdminTools --> UserManager
+    AdminTools --> FeedbackReview
+    AdminTools --> SchedulerOverride
+```
+```mermaid
+stateDiagram-v2
+    [*] --> View
+    View --> SelectUser
+    SelectUser --> BanUser : Ban action
+    SelectUser --> Reschedule : Reschedule action
+    SelectUser --> DeleteUser : Delete action
+    BanUser --> [*]
+    Reschedule --> [*]
+    DeleteUser --> [*]
+```
 
 #### Unit test description
 
@@ -758,7 +1204,14 @@ Fetches user-specific scheduling data for determining when to send update notifi
 
 #### Diagrams
 
-Sequence Diagram: Scheduler Service -> Scheduler DB -> Return Frequency/Time
+```mermaid
+sequenceDiagram
+    participant SchedulerService
+    participant SchedulerDB
+
+    SchedulerService->>SchedulerDB: Query schedule by user ID
+    SchedulerDB-->>SchedulerService: Return frequency and next update time
+```
 
 #### Unit test description
 
@@ -774,8 +1227,17 @@ Retrieves user metadata such as preferences, contact info, and login credentials
 
 #### Diagrams
 
-Class Diagram: User(id, email, preferences, schedule)
-Sequence Diagram: Profile Load/Login -> User DB
+```mermaid
+sequenceDiagram
+    participant Frontend
+    participant API
+    participant UserDB
+
+    Frontend->>API: Request user data (login/profile)
+    API->>UserDB: SELECT * FROM users WHERE id/email = ?
+    UserDB-->>API: Return user record
+    API-->>Frontend: Return user metadata (masked as needed)
+```
 
 #### Unit test description
 
@@ -791,7 +1253,17 @@ Allows retrieval of all prior user search queries, useful for both frontend disp
 
 #### Diagrams
 
-Sequence Diagram: Load Search History -> Search DB -> Return Query List
+```mermaid
+sequenceDiagram
+    participant Frontend
+    participant API
+    participant SearchHistoryDB
+
+    Frontend->>API: Request search history for user
+    API->>SearchHistoryDB: SELECT * FROM search_history WHERE user_id = ?
+    SearchHistoryDB-->>API: Return list of past queries
+    API-->>Frontend: Deliver search history data
+```
 
 #### Unit test description
 
@@ -803,17 +1275,26 @@ Sequence Diagram: Load Search History -> Search DB -> Return Query List
 
 #### Description
 
-Retrieves user-submitted feedback for review and analysis.
+Retrieves user-submitted feedback for AI optimization of article summarization and relevance + search strategy improvement
 
 #### Diagrams
 
-Sequence Diagram: Admin Panel -> Feedback DB -> Return Feedback Records
+```mermaid
+sequenceDiagram
+    participant OptimizationRequest
+    participant API
+    participant FeedbackDB
+
+    OptimizationRequest->>API: Request feedback records
+    API->>FeedbackDB: SELECT * FROM feedback WHERE filters
+    FeedbackDB-->>API: Return feedback entries
+    API-->>OptimizationRequest: Deliver feedback data
+
+```
 
 #### Unit test description
 
 1. Pull feedback entries
-2. Support filtering by user/timestamp
-3. Validate completeness of data
 
 ### Unit 34: Update information from scheduler database (Backend, Databases)
 
@@ -823,7 +1304,17 @@ Updates existing scheduler entries, e.g., modifying frequency or resetting timer
 
 #### Diagrams
 
-Sequence Diagram: Cron Job/Event -> Scheduler DB (UPDATE)
+```mermaid
+sequenceDiagram
+    participant CronJob
+    participant SchedulerService
+    participant SchedulerDB
+
+    CronJob->>SchedulerService: Trigger update event
+    SchedulerService->>SchedulerDB: UPDATE scheduler SET frequency = ?, next_update = ? WHERE id = ?
+    SchedulerDB-->>SchedulerService: Acknowledge update
+    SchedulerService-->>CronJob: Confirm update completed
+```
 
 #### Unit test description
 
@@ -839,14 +1330,22 @@ Applies edits to user profiles such as preferences, scheduling frequency, or con
 
 #### Diagrams
 
-Class Diagram: EditableUser(id, preferences, contact_info)
-Sequence Diagram: Save Profile -> User DB (UPDATE)
+```mermaid
+sequenceDiagram
+    participant Frontend
+    participant API
+    participant UserDB
+
+    Frontend->>API: Submit updated profile data
+    API->>UserDB: UPDATE users SET preferences = ?, contact_info = ? WHERE id = ?
+    UserDB-->>API: Acknowledge update
+    API-->>Frontend: Confirm update success
+```
 
 #### Unit test description
 
 1. Validate input before update
 2. Update only allowed fields
-3. Confirm persistence
 
 ### Unit 36: Update information from search history database (Backend, Databases)
 
@@ -856,7 +1355,17 @@ Enables adding metadata or tagging previous search history entries post-query (e
 
 #### Diagrams
 
-Sequence Diagram: Scoring Job -> Search DB (UPDATE)
+```mermaid
+sequenceDiagram
+    participant ScoringJob
+    participant API
+    participant SearchHistoryDB
+
+    ScoringJob->>API: Submit relevance scores and query metadata
+    API->>SearchHistoryDB: UPDATE search_history SET metadata = ? WHERE id = ?
+    SearchHistoryDB-->>API: Confirm update success
+    API-->>ScoringJob: Acknowledge update completion
+```
 
 #### Unit test description
 
@@ -868,18 +1377,44 @@ Sequence Diagram: Scoring Job -> Search DB (UPDATE)
 
 #### Description
 
-Adds administrative notes or flags to existing feedback records for moderation or follow-up.
+Users can provide feedback on the accuracy and relevance of search results and AI-generated summaries. The system leverages this feedback to refine future search strategies and improve article summarization.
 
 #### Diagrams
 
-Class Diagram: FeedbackEntry(id, user_id, comment, status_flag)
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant FeedbackDB
+    participant AdminPanel
+    participant SearchOptimizer
+
+    User->>Frontend: Submit feedback
+    Frontend->>API: Send feedback data
+    API->>FeedbackDB: INSERT feedback entry
+    FeedbackDB-->>API: Confirm insertion
+    API-->>Frontend: Acknowledge submission
+
+    AdminPanel->>API: Retrieve feedback for review
+    API->>FeedbackDB: SELECT feedback entries
+    FeedbackDB-->>API: Return feedback data
+    API-->>AdminPanel: Deliver feedback entries
+
+    AdminPanel->>API: Update feedback status/admin notes
+    API->>FeedbackDB: UPDATE feedback entry
+    FeedbackDB-->>API: Confirm update
+
+    API->>SearchOptimizer: Send feedback data
+    SearchOptimizer-->>API: Confirm integration
+```
 
 #### Unit test description
 
-1. Modify comment metadata (e.g., status)
-2. Enforce permission checks
-3. Audit change logs
-
+1. Modify feedback metadata (e.g., status)
+2. Verify only authorized users can modify feedback
+4. Feedback integration functions as expected
+   
 ### Unit 38: Encryt password (Backend, Databases)
 
 #### Description
@@ -888,7 +1423,47 @@ Hashes user passwords before storing them in the database to ensure secure authe
 
 #### Diagrams
 
-Sequence Diagram: Sign Up -> Hash Function -> User DB (INSERT hashed_pw)
+```mermaid
+classDiagram
+    class User {
+        +int id
+        +string email
+        -string password_hash
+        +register(email: string, password: string)
+        +authenticate(password: string): bool
+    }
+
+    class PasswordHasher {
+        +string hash(password: string)
+        +bool verify(password: string, hash: string)
+    }
+
+    User --> PasswordHasher : uses
+```
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant HashFunction
+    participant UserDB
+
+    User->>Frontend: Enter email and password
+    Frontend->>API: Submit registration data
+    API->>HashFunction: Hash password
+    HashFunction-->>API: Return hashed password
+    API->>UserDB: INSERT user with hashed password
+    UserDB-->>API: Confirm insertion
+    API-->>Frontend: Registration successful
+
+    User->>Frontend: Enter email and password
+    Frontend->>API: Submit login data
+    API->>UserDB: Retrieve stored hashed password
+    UserDB-->>API: Return hashed password
+    API->>HashFunction: Verify password
+    HashFunction-->>API: Verification result
+    API-->>Frontend: Login success or failure
+```
 
 #### Unit test description
 
@@ -904,7 +1479,24 @@ Creates a new entry in the scheduler database when a user adds a new search quer
 
 #### Diagrams
 
-Sequence Diagram: Signup/Profile Save -> Scheduler DB (INSERT)
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant SchedulerDB
+
+    User->>Frontend: Submit new or updated search query
+    Frontend->>API: Send query data with scheduling preferences
+    API->>SchedulerDB: Check for existing scheduler entry
+    alt Existing scheduler entry found
+        API->>SchedulerDB: DELETE existing scheduler entry
+    end
+    API->>SchedulerDB: INSERT new scheduler item
+    SchedulerDB-->>API: Confirm insertion
+    API-->>Frontend: Return success message
+    Frontend-->>User: Display confirmation
+```
 
 #### Unit test description
 
@@ -921,6 +1513,23 @@ Handles the creation of a new user account in the database during the signup pro
 
 #### Diagrams
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant HashFunction
+    participant UserDB
+
+    User->>Frontend: Submit signup form (email, password, preferences)
+    Frontend->>API: Send signup data
+    API->>HashFunction: Hash password
+    HashFunction-->>API: Return hashed password
+    API->>UserDB: INSERT new user (email, hashed password, preferences, created_at)
+    UserDB-->>API: Confirm insertion
+    API-->>Frontend: Return success message
+    Frontend-->>User: Display account creation confirmation
+```
 Sequence Diagram: Sign Up Form -> API -> User DB (INSERT)
 Class Diagram: User(id, email, password_hash, preferences, created_at)
 
@@ -939,8 +1548,16 @@ Creates a new record in the search history database each time a user submits a n
 
 #### Diagrams
 
-Sequence Diagram: New Query Submit -> API -> Search History DB (INSERT)
-Class Diagram: SearchHistory(id, user_id, query_string, timestamp, result_ref)
+```mermaid
+sequenceDiagram
+    participant Scheduler
+    participant API
+    participant SearchHistoryDB
+
+    Scheduler->>API: Trigger update for user
+    API->>SearchHistoryDB: INSERT new search history entry
+    SearchHistoryDB-->>API: Confirm insertion
+```
 
 #### Unit test description
 
@@ -957,6 +1574,20 @@ Inserts new user feedback (comments, ratings) into feedback database for future 
 
 #### Diagrams
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant FeedbackDB
+
+    User->>Frontend: Submit feedback (comment, rating)
+    Frontend->>API: Send feedback data
+    API->>FeedbackDB: INSERT new feedback entry
+    FeedbackDB-->>API: Confirm insertion
+    API-->>Frontend: Return success message
+    Frontend-->>User: Display confirmation
+```
 Sequence Diagram: Frontend -> API -> Feedback Table (INSERT)
 
 #### Unit test description
