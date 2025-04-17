@@ -30,15 +30,15 @@ All work is to be completed by Elizabeth Elias.
 ## Version control
 
 ### Branch Types:
-<code>main</code>: Deployments are made from main branch, only contains production-ready code.
-<code>develop</code>: Feature-integration branch, new features and bug fixes are merged here before being merged onto <code>main</code>. 
-Feature branches: Branched from <code>develop</code> for new features and feature improvements.
-Bug branches: Branched from <code>develop</code> to address bugs in the code. 
+<code>main</code>: Deployments are made from main branch, only contains production-ready code. <p>
+<code>develop</code>: Feature-integration branch, new features and bug fixes are merged here before being merged onto <code>main</code>. <p>
+Feature branches: Branched from <code>develop</code> for new features and feature improvements. <p>
+Bug branches: Branched from <code>develop</code> to address bugs in the code. <p>
 
 ### Merging and Rebasing
-Feature, bug branches: Rebase regularly onto develop to minimize merge conflicts and stay on track with updates
-Merge to <code>develop</code>: Use PRs for merging. Prior to merging, ensure code review and automated tests pass. 
-Merge to <code>main</code>: Once develop is ready for release, use a PR to merge onto main
+Feature, bug branches: Rebase regularly onto develop to minimize merge conflicts and stay on track with updates. <p>
+Merge to <code>develop</code>: Use PRs for merging. Prior to merging, ensure code review and automated tests pass. <p>
+Merge to <code>main</code>: Once develop is ready for release, use a PR to merge onto main. <p>
 
 ### Version Labeling
 Use [Semantic Versioning](https://semver.org/) in standard <code>MAJOR.MINOR.PATCH</code> format
