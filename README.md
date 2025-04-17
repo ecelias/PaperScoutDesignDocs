@@ -48,9 +48,9 @@ The categories for this project are as follows: Front End, AI Integration, Messa
 
 A unit for a Front End component would be considered a page on the website. For example, the sign-up page, user dashboard, and landing pages would each be considered an individual component which includes their UI design and final code using CSS / React. 
 
-A units for the AI, messaging, and database components will be considered a function. Because these categories will likely require a lot of fine tuning and specific steps to ensure that the website can function properly, using the most granular unit is important. The AI features are beneficial to users and adjust correctly, each function should be tested independently and all units will need to be integrated precisely. The messaging component will be handling sensitive user information so the smallest unit should be tested to ensure safety of user information and ensure that updates to users are provided as expected and do not add to any confusion young researchers may face when entering their research fields. The database component not only needs to ensure that databases can be accessed and updated correctly, but also stores any user information securely. 
+Units for the AI, messaging, database components will be considered a function. These categories will likely require a lot of fine tuning and specific steps to ensure that the website can function properly, thus making a granular unit important. Each function should be tested independently and all units will need to be integrated precisely, which will ensure user security, accurate updates to databases, and that information from databases can be accessed correctly. The messaging component will be handling sensitive user information so the smallest unit should be tested to ensure safety of user information and ensure that updates to users are provided as expected and do not add to any confusion young researchers may face when entering their research fields. The database component not only needs to ensure that databases can be accessed and updated correctly, but also stores any user information securely. However, unit tests that ensure all messaging and database functions can function as one entity will be necessary to write as well. 
 
-A unit for the other back end components will be considered a class. Backend components not associated with the AI, messaging, or database components will likely need to function as objects, so the individual functions within those classes will need to function together intitially to make the website functional. 
+A unit for the other backend components will be considered a class. Backend components not associated with the messaging or database components will likely need to function as objects, so the individual functions within those classes will need to function together intitially to make the website functional. Additionally, the actual databases themselves will be considered their own unit in addition to the associated functions that will be used to access and update each respective database.
 
 ## Quality
 
@@ -111,392 +111,690 @@ _Describe tools (IDE, Debugger, build tools, test framework) you'll use in the p
 ### Unit 1: Landing Page (Front End)
 
 #### Description
-_Describe the point of the unit_
+Summarizes PaperScout.ai and directs users to log-in or sign up. 
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: User -> Browser -> React App -> Route Redirect
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Renders components correctly
+2. Buttons to login/signup work
+3. Responsive layout, content loads
 
 ### Unit 2: About App Page (Front End)
 
 #### Description
-_Describe the point of the unit_
+
+Educates users about the app's goals, how it works, and its benefits to researchers.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Class Diagram showing static content component tree
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Renders static content
+2. Responsive behavior
 
 ### Unit 3: About Developer Page (Front End)
 
 #### Description
-_Describe the point of the unit_
+
+Displays developer bio and contact information, possibly including GitHub or portfolio.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Class Diagram of static content
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Component renders properly
+2. Contains links to Elizabeth's github
 
 ### Unit 4: Sign Up Page (Front End)
 
 #### Description
-_Describe the point of the unit_
+
+Allows new users to create an account.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: User -> Signup Form -> API -> User DB
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Valid input accepted
+2. Invalid input shows errors
+3. Form submits to backend
+4. Redirects to login
 
 ### Unit 5: Login Page (Front End)
 
 #### Description
-_Describe the point of the unit_
+
+Authenticates returning users.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+State Machine: Logged Out -> Logging In -> Authenticated
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Valid credentials accepted
+2. Invalid credentials show error
+3. Redirects on success
 
 ### Unit 6: User Dashboard (Front End)
 
 #### Description
-_Describe the point of the unit_
+
+Central hub for viewing updates, saved searches, and navigating features.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Component Hierarchy (Dashboard, Update Feed, NavBar)
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Loads user-specific data
+2. Interacts with update and search history components
 
 ### Unit 7: User Profile (Front End)
 
 #### Description
-_Describe the point of the unit_
+
+Displays and allows editing of user preferences and scheduling options.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+State Machine: View Mode <-> Edit Mode
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Fields render properly
+2. Edit mode saves to backend
 
 ### Unit 8: Search History Page (Front End)
 
 #### Description
-_Describe the point of the unit_
+
+Lists user’s past queries and links to associated summaries. Also lists articles returned from each queries and their relevant information (authors, DOI, database). Allows past queries to be edited. 
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: User -> UI -> Query DB
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Query history renders
+2. Links to past summaries work
+3. Relevant article info properly displayed
+4. Users can option prevoius search options
 
 ### Unit 9: New Query Page (Front End)
 
 #### Description
-_Describe the point of the unit_
+
+Form for users to define and submit a new literature search.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: User -> Query Form -> API -> PubMed/arXiv
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Input validation
+2. Successful submission triggers backend fetch
 
 ### Unit 10: Previous Search Page (Front End)
 
 #### Description
-_Describe the point of the unit_
+
+Shows results for a selected previous query.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Component Hierarchy: Metadata + Summary Cards
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Displays correct search results
+2. Navigation back to dashboard works
 
 ### Unit 11: User Database (Backend, Databases)
 
 #### Description
-_Describe the point of the unit_
+
+Stores user information including email, hashed password, preferences, and delivery schedule.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Class Diagram: User(id, email, password_hash, preferences, schedule)
+Sequence Diagram: SignUp/Login -> API -> User DB (SELECT/INSERT)
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Insert new user
+2. Validate password hashing
+3. Retrieve user by email
+4. Update preferences
 
 ### Unit 12: User Feedback Database (Backend, Databases)
 
 #### Description
-_Describe the point of the unit_
+
+Captures user-submitted feedback including satisfaction scores and suggestions for improvement.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Class Diagram: Feedback(id, user_id, timestamp, rating, comment)
+Sequence Diagram: Submit Feedback -> API -> Feedback DB (INSERT)
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Add valid feedback
+2. Enforce required fields
+3. Retrieve feedback by user/date
 
 ### Unit 13: Search History Database (Backend, Databases)
 
 #### Description
-_Describe the point of the unit_
+
+Logs all search queries made by a user, along with metadata and result summaries.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Class Diagram: SearchHistory(id, user_id, query, timestamp, summary_ref)
+Sequence Diagram: Submit Query -> API -> Search History DB (INSERT)
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Insert search history
+2. Retrieve history by user
+3. Delete/clean up old history entries
 
 ### Unit 14: Scheduler Database (Backend, Databases)
 
 #### Description
-_Describe the point of the unit_
+
+Manages scheduling preferences for article updates (e.g., frequency, next update time).
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Class Diagram: Scheduler(id, user_id, frequency, next_update, last_run)
+State Machine: Active -> Scheduled -> Triggered -> Updated
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Add/update scheduler entry
+2. Compute next run time
+3. Fetch scheduler job by user ID
 
 ### Unit 15: Dashboard Interactivity (Backend, User Workflow)
 
 #### Description
-_Describe the point of the unit_
+
+Handles user input on dashboard (e.g., feedback on articles, bookmarking, editing settings).
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: User -> Dashboard -> API -> DB Updates
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Save feedback from dashboard
+2. Bookmark an article
+3. Edit search preferences
 
 ### Unit 16: Dashboard Display (Backend, User Workflow)
 
 #### Description
-_Describe the point of the unit_
+
+Populates the frontend dashboard with user-specific update summaries and profile data.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Class Diagram: DashboardData(UserInfo, UpdateSummaries, SchedulerInfo)
+Sequence Diagram: User -> Dashboard Load -> API -> DB Reads
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Correct data shown for each user
+2. Returns recent updates only
+3. Handles edge cases (no updates, missing profile)
 
 ### Unit 17: User Login (Backend, User Workflow)
 
 #### Description
-_Describe the point of the unit_
+
+Authenticates users using their credentials and manages session tokens.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: Login Request -> Auth Service -> Token Generation -> Response
+State Machine: Logged Out -> Auth Validated -> Logged In
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Correct login with valid credentials
+2. Deny access with invalid credentials
+3. Token returned and stored securely
 
 ### Unit 18: User Sign Up (Backend, User Workflow)
 
 #### Description
-_Describe the point of the unit_
+
+Registers new users and inserts their credentials and preferences into the system.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: Form Submit -> API -> User DB (INSERT)
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Validate all required fields
+2. Ensure email uniqueness
+3. Verify email
+4. Store encrypted password
 
 ### Unit 19: New Query (Backend, User Workflow)
 
 #### Description
-_Describe the point of the unit_
+
+Takes new search queries, calls literature APIs, stores query, and returns results.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: Submit Query -> API -> PubMed/arXiv -> Summary + Store Query -> Return Results
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Store query string
+2. Return articles from API
+3. Store metadata and summary reference
 
 ### Unit 20: User Profile (Backend, User Workflow)
 
 #### Description
-_Describe the point of the unit_
+
+Manages user profile updates such as preferred fields, summary frequency, and contact info.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Class Diagram: Profile(id, user_id, fields_of_interest, schedule)
+Sequence Diagram: View/Edit Profile -> API -> DB (SELECT/UPDATE)
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Profile loads with correct data
+2. Update preferences saved
+3. Missing fields show default values
 
 ### Unit 21: Search History (Backend, User Workflow)
 
 #### Description
-_Describe the point of the unit_
+
+Retrieves a user's previous queries and associated metadata for display and re-use.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: Dashboard -> API -> Search History DB -> Return past queries
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Fetch history by user
+2. Return most recent searches first
+3. Handle empty history case
 
 ### Unit 22: User Feedback (Backend, User Workflow)
 
 #### Description
-_Describe the point of the unit_
+
+Collects and processes user feedback submitted through the interface.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: Feedback Form -> API -> Feedback DB
 
 #### Unit test description
 
-_List the unit tests for this unit_
-
+1. Accept valid feedback
+2. Reject malformed feedback
+3. Store metadata (timestamp, user ID)
+   
 ### Unit 23: Update Notifications (Backend, Messaging)
 
 #### Description
-_Describe the point of the unit_
+
+Sends update summaries via email or in-app notifications based on user schedules.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: Cron Job -> Scheduler DB -> Generate Update -> Send Notification
+State Machine: Scheduled -> Triggered -> Sent
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Triggered on schedule
+2. Sends correct content
+3. Logs notification status
 
 ### Unit 24: PubMed API (Backend, API)
 
 #### Description
-_Describe the point of the unit_
+
+Connects to PubMed to retrieve articles based on user-defined queries.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: Query -> API Wrapper -> PubMed -> Return Article Metadata
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Alternate queries execute correctly
+2. Error fallback works
+3. Metadata returned is accurate
 
-### Unit 25: PubMed API (Backend, API)
+### Unit 25: arXIV API (Backend, API)
 
 #### Description
-_Describe the point of the unit_
+
+Interfaces with arXiv to retrieve relevant preprints matching user queries.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: Query -> arXiv Wrapper -> arXiv -> Parse + Return Metadata
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Generate valid query syntax
+2. Parse arXiv XML responses
+3. Handle missing or malformed data
 
-### Unit 26: arXIV API (Backend, API)
+### Unit 26: Article Selection & Summarization (Backend, API/AI/Messaging)
 
 #### Description
-_Describe the point of the unit_
+
+Filters retrieved articles and generates concise, readable AI summaries for each.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: API Response -> Summarizer Module -> Summary + Key Points
+State Machine: Raw Article -> Selected -> Summarized
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Selects top articles per user/topic
+2. Summaries under word limit
+3. Validate NLP pipeline outputs
 
-### Unit 27: Article Selection & Summarization (Backend, API/AI/Messaging)
+### Unit 27: Search Query Optomization (Backend, AI Integration)
 
 #### Description
-_Describe the point of the unit_
+
+Improves user queries via NLP techniques to enhance article retrieval relevance.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Class Diagram: QueryOptimizer(InputAnalyzer, SynonymExpander)
+Sequence Diagram: User Query -> Optimizer -> PubMed/arXiv
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Outputs improved queries
+2. Handles edge cases (stop words, short queries)
+3. Boosts match rate in test cases
 
-### Unit 28: Search Query Optomization (Backend, AI Integration)
+### Unit 28: Update Formatting (Backend, Messaging)
 
 #### Description
-_Describe the point of the unit_
+
+Converts selected articles and summaries into a user-friendly update message format (HTML/email/in-app).
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Class Diagram: UpdateFormatter(TemplateEngine, MarkdownRenderer)
+Sequence Diagram: Summaries -> Formatter -> Email/In-app Payload
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Format summary blocks cleanly
+2. Escape special characters
+3. Include links and metadata
 
-### Unit 29: Update Formatting (Backend, Messaging)
+### Unit 29: Admin Capabilities (Backend)
 
 #### Description
-_Describe the point of the unit_
+
+Provides admin-level tools for managing users, monitoring system usage, and updating content settings.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Class Diagram: AdminTools(UserManager, FeedbackReview, SchedulerOverride)
+State Machine: View -> Select User -> Take Action (Ban, Reschedule, Delete)
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Admin actions authorized only
+2. Retrieve user/search logs
+3. Modify schedules or purge data
 
-### Unit 30: Admin Capabilities (Backend)
+### Unit 30: Access Information from Scheduler Database (Backend, Databases)
 
 #### Description
-_Describe the point of the unit_
+
+Fetches user-specific scheduling data for determining when to send update notifications.
 
 #### Diagrams
 
-_Include some diagrammatic description of the unit. A class diagram? A sequence diagram? A state machine?_
+Sequence Diagram: Scheduler Service -> Scheduler DB -> Return Frequency/Time
 
 #### Unit test description
 
-_List the unit tests for this unit_
+1. Query scheduler info by user ID
+2. Handle missing or invalid IDs
+3. Confirm correct data formatting
+
+### Unit 31: Access Information from User Database (Backend, Databases)
+
+#### Description
+
+Retrieves user metadata such as preferences, contact info, and login credentials.
+
+#### Diagrams
+
+Class Diagram: User(id, email, preferences, schedule)
+Sequence Diagram: Profile Load/Login -> User DB
+
+#### Unit test description
+
+1. Return correct user on query
+2. Handle non-existent user
+3. Mask sensitive fields where necessary
+
+### Unit 32: Access Information from Search History Database (Backend, Databases)
+
+#### Description
+
+Allows retrieval of all prior user search queries, useful for both frontend display and backend analytics.
+
+#### Diagrams
+
+Sequence Diagram: Load Search History -> Search DB -> Return Query List
+
+#### Unit test description
+
+1. Fetch history by user
+2. Handle no-history case
+3. Ensure time-based ordering
+
+### Unit 33: Access Information from Feedback Database (Backend, Databases)
+
+#### Description
+
+Retrieves user-submitted feedback for review and analysis.
+
+#### Diagrams
+
+Sequence Diagram: Admin Panel -> Feedback DB -> Return Feedback Records
+
+#### Unit test description
+
+1. Pull feedback entries
+2. Support filtering by user/timestamp
+3. Validate completeness of data
+
+### Unit 34: Update information from scheduler database (Backend, Databases)
+
+#### Description
+
+Updates existing scheduler entries, e.g., modifying frequency or resetting timers after an update.
+
+#### Diagrams
+
+Sequence Diagram: Cron Job/Event -> Scheduler DB (UPDATE)
+
+#### Unit test description
+
+1. Update by scheduler ID
+2. Ensure data integrity (valid frequencies only)
+3. Handle concurrent updates
+
+### Unit 35: update information from user database (Backend, Databases)
+
+#### Description
+
+Applies edits to user profiles such as preferences, scheduling frequency, or contact details.
+
+#### Diagrams
+
+Class Diagram: EditableUser(id, preferences, contact_info)
+Sequence Diagram: Save Profile -> User DB (UPDATE)
+
+#### Unit test description
+
+1. Validate input before update
+2. Update only allowed fields
+3. Confirm persistence
+
+### Unit 36: Update information from search history database (Backend, Databases)
+
+#### Description
+
+Enables adding metadata or tagging previous search history entries post-query (e.g., adding relevance scores).
+
+#### Diagrams
+
+Sequence Diagram: Scoring Job -> Search DB (UPDATE)
+
+#### Unit test description
+
+1. Update correct entry by ID
+2. Reject invalid metadata formats
+3. Ensure history record integrity
+
+### Unit 37: Update information from feedback database (Backend, Databases)
+
+#### Description
+
+Adds administrative notes or flags to existing feedback records for moderation or follow-up.
+
+#### Diagrams
+
+Class Diagram: FeedbackEntry(id, user_id, comment, status_flag)
+
+#### Unit test description
+
+1. Modify comment metadata (e.g., status)
+2. Enforce permission checks
+3. Audit change logs
+
+### Unit 38: Encryt password (Backend, Databases)
+
+#### Description
+
+Hashes user passwords before storing them in the database to ensure secure authentication.
+
+#### Diagrams
+
+Sequence Diagram: Sign Up -> Hash Function -> User DB (INSERT hashed_pw)
+
+#### Unit test description
+
+1. Hashing function applied correctly
+2. Ensure hash is not reversible
+3. Compare hashed values during login
+
+### Unit 39: Create new scheduler item (Backend, Databases)
+
+#### Description
+
+Creates a new entry in the scheduler database when a user adds a new search query or modifies a search query. 
+
+#### Diagrams
+
+Sequence Diagram: Signup/Profile Save -> Scheduler DB (INSERT)
+
+#### Unit test description
+
+1. Accept valid input for frequency/time
+2. Validate scheduler entry format
+3. Reject duplicates or conflicting entries
+4. If existing search updated, scheduler deletes previous entry
+
+### Unit 40: Create new user (Backend, Databases)
+
+#### Description
+
+Handles the creation of a new user account in the database during the signup process, storing all necessary information such as email, hashed password, and preferences.
+
+#### Diagrams
+
+Sequence Diagram: Sign Up Form -> API -> User DB (INSERT)
+Class Diagram: User(id, email, password_hash, preferences, created_at)
+
+#### Unit test description
+
+1. Accept valid new user data
+2. Hash password before insert
+3. Enforce email uniqueness
+4. Reject incomplete/malformed entries
+   
+### Unit 41: Create new search history item (Backend, Databases)
+
+#### Description
+
+Creates a new record in the search history database each time a user submits a new query, including timestamp and query metadata.
+
+#### Diagrams
+
+Sequence Diagram: New Query Submit -> API -> Search History DB (INSERT)
+Class Diagram: SearchHistory(id, user_id, query_string, timestamp, result_ref)
+
+#### Unit test description
+
+1. Insert new search entry with valid data
+2. Confirm association with correct user ID
+3. Handle optional fields (e.g., result references)
+4. Timestamp generation and format checks
+
+### Unit 42: Create new feedback item (Backend, Databases)
+
+#### Description
+
+Inserts new user feedback (comments, ratings) into feedback database for future analysis and improvements.
+
+#### Diagrams
+
+Sequence Diagram: Frontend -> API -> Feedback Table (INSERT)
+
+#### Unit test description
+
+1. Valid feedback is added
+2. Invalid feedback triggers error
+3. Required fields enforced
 
 # Integration tests
 
