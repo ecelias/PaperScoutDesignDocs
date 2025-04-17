@@ -29,7 +29,22 @@ All work is to be completed by Elizabeth Elias.
 
 ## Version control
 
-_Describe a version control strategy. Will you branch? Will you rebase? How many branches will you maintain? How will versions be labeled?_
+### Branch Types:
+<code>main</code>: Deployments are made from main branch, only contains production-ready code.
+<code>develop</code>: Feature-integration branch, new features and bug fixes are merged here before being merged onto <code>main</code>. 
+Feature branches: Branched from <code>develop</code> for new features and feature improvements.
+Bug branches: Branched from <code>develop</code> to address bugs in the code. 
+
+### Merging and Rebasing
+Feature, bug branches: Rebase regularly onto develop to minimize merge conflicts and stay on track with updates
+Merge to <code>develop</code>: Use PRs for merging. Prior to merging, ensure code review and automated tests pass. 
+Merge to <code>main</code>: Once develop is ready for release, use a PR to merge onto main
+
+### Version Labeling
+Use [Semantic Versioning](https://semver.org/) in standard <code>MAJOR.MINOR.PATCH</code> format
+1. MAJOR version when you make incompatible API changes
+2. MINOR version when you add functionality in a backward compatible manner
+3. PATCH version when you make backward compatible bug fixes
 
 ## Project Structure
 
