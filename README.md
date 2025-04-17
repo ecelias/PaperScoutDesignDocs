@@ -285,8 +285,19 @@ Summarizes PaperScout.ai and directs users to log-in or sign up.
 #### Diagrams
 
 ```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant ReactApp
+    participant Router
+
+    User->>+Browser: Enter PaperScout.ai URL
+    Browser->>+ReactApp: Load landing page
+    ReactApp->>+Router: Determine route ("/")
+    Router-->>-ReactApp: Render LandingPage component
+    ReactApp-->>-Browser: Display landing page
+    Browser-->>-User: Show login/signup options
 ```
-Sequence Diagram: User -> Browser -> React App -> Route Redirect
 
 #### Unit test description
 
@@ -303,8 +314,42 @@ Educates users about the app's goals, how it works, and its benefits to research
 #### Diagrams
 
 ```mermaid
+classDiagram
+    class AboutPage {
+        +render()
+    }
+
+    class Header {
+        +render()
+    }
+
+    class ContentSection {
+        +render()
+    }
+
+    class Footer {
+        +render()
+    }
+
+    class HowItWorks {
+        +render()
+    }
+
+    class Benefits {
+        +render()
+    }
+
+    class MissionStatement {
+        +render()
+    }
+
+    AboutPage --> Header
+    AboutPage --> ContentSection
+    AboutPage --> Footer
+    ContentSection --> HowItWorks
+    ContentSection --> Benefits
+    ContentSection --> MissionStatement
 ```
-Class Diagram showing static content component tree
 
 #### Unit test description
 
@@ -320,8 +365,32 @@ Displays developer bio and contact information, possibly including GitHub or por
 #### Diagrams
 
 ```mermaid
+classDiagram
+    class AboutDeveloperPage {
+        +render()
+    }
+
+    class Header {
+        +render()
+    }
+
+    class DeveloperBio {
+        +render()
+    }
+
+    class ContactLinks {
+        +render()
+    }
+
+    class Footer {
+        +render()
+    }
+
+    AboutDeveloperPage --> Header
+    AboutDeveloperPage --> DeveloperBio
+    AboutDeveloperPage --> ContactLinks
+    AboutDeveloperPage --> Footer
 ```
-Class Diagram of static content
 
 #### Unit test description
 
@@ -337,8 +406,30 @@ Allows new users to create an account.
 #### Diagrams
 
 ```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant ReactApp
+    participant API
+    participant UserDB
+
+    User->>+Browser: Navigate to Sign Up page
+    Browser->>+ReactApp: Load SignUp component
+    ReactApp-->>-Browser: Display sign-up form
+
+    User->>+Browser: Enter email & password
+    Browser->>+ReactApp: Capture form data
+    ReactApp->>+API: POST /signup with user data
+    API->>+UserDB: INSERT new user (email, hashed password)
+    UserDB-->>-API: Success or error response
+    API-->>-ReactApp: Return status (success or error)
+    ReactApp-->>-Browser: Show confirmation or error message
+    alt Successful sign-up
+        Browser-->>User: Redirect to login page
+    else Sign-up error
+        Browser-->>User: Display error message
+    end
 ```
-Sequence Diagram: User -> Signup Form -> API -> User DB
 
 #### Unit test description
 
@@ -356,8 +447,15 @@ Authenticates returning users.
 #### Diagrams
 
 ```mermaid
+stateDiagram-v2
+    [*] --> LoggedOut
+
+    LoggedOut --> LoggingIn : User submits login form
+    LoggingIn --> Authenticated : Valid credentials
+    LoggingIn --> LoginError : Invalid credentials
+    LoginError --> LoggedOut : User retries
+    Authenticated --> [*]
 ```
-State Machine: Logged Out -> Logging In -> Authenticated
 
 #### Unit test description
 
@@ -374,8 +472,13 @@ Central hub for viewing updates, saved searches, and navigating features.
 #### Diagrams
 
 ```mermaid
+graph TD
+  Dashboard --> NavBar
+  Dashboard --> UpdateFeed
+  Dashboard --> SearchHistory
+  Dashboard --> ProfileSummary
+  Dashboard --> SettingsPanel
 ```
-Component Hierarchy (Dashboard, Update Feed, NavBar)
 
 #### Unit test description
 
@@ -391,8 +494,15 @@ Displays and allows editing of user preferences and scheduling options.
 #### Diagrams
 
 ```mermaid
+stateDiagram-v2
+    [*] --> ViewingProfile
+
+    ViewingProfile --> EditingProfile : Click "Edit"
+    EditingProfile --> ViewingProfile : Click "Cancel"
+    EditingProfile --> SavingProfile : Click "Save"
+    SavingProfile --> ViewingProfile : Save successful
+    SavingProfile --> EditingProfile : Save failed
 ```
-State Machine: View Mode <-> Edit Mode
 
 #### Unit test description
 
@@ -408,8 +518,37 @@ Lists user’s past queries and links to associated summaries. Also lists articl
 #### Diagrams
 
 ```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant ReactApp
+    participant API
+    participant SearchHistoryDB
+
+    User->>+Browser: Navigate to Search History Page
+    Browser->>+ReactApp: Load SearchHistory component
+    ReactApp->>+API: GET /search-history
+    API->>+SearchHistoryDB: Retrieve user's past queries
+    SearchHistoryDB-->>-API: Return query data
+    API-->>-ReactApp: Send query data
+    ReactApp-->>-Browser: Render search history list
+
+    User->>+Browser: Click on a past query
+    Browser->>+ReactApp: Load QueryDetail component
+    ReactApp->>+API: GET /search-history/{queryId}
+    API->>+SearchHistoryDB: Retrieve query details
+    SearchHistoryDB-->>-API: Return query details
+    API-->>-ReactApp: Send query details
+    ReactApp-->>-Browser: Display query details and associated articles
+
+    User->>+Browser: Click "Edit" on a past query
+    Browser->>+ReactApp: Load EditQuery component
+    ReactApp->>+API: PUT /search-history/{queryId} with updated data
+    API->>+SearchHistoryDB: Update query information
+    SearchHistoryDB-->>-API: Confirm update
+    API-->>-ReactApp: Send update confirmation
+    ReactApp-->>-Browser: Reflect updated query information
 ```
-Sequence Diagram: User -> UI -> Query DB
 
 #### Unit test description
 
@@ -427,8 +566,28 @@ Form for users to define and submit a new literature search.
 #### Diagrams
 
 ```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant ReactApp
+    participant API
+    participant PubMed
+    participant arXiv
+
+    User->>+Browser: Navigate to New Query Page
+    Browser->>+ReactApp: Load NewQueryForm component
+    ReactApp-->>-Browser: Display query form
+
+    User->>+Browser: Enter search terms and preferences
+    Browser->>+ReactApp: Capture form data
+    ReactApp->>+API: POST /queries with form data
+    API->>+PubMed: Fetch articles based on query
+    API->>+arXiv: Fetch articles based on query
+    PubMed-->>-API: Return PubMed articles
+    arXiv-->>-API: Return arXiv articles
+    API-->>-ReactApp: Return combined results
+    ReactApp-->>-Browser: Display search results
 ```
-Sequence Diagram: User -> Query Form -> API -> PubMed/arXiv
 
 #### Unit test description
 
@@ -444,6 +603,10 @@ Shows results for a selected previous query.
 #### Diagrams
 
 ```mermaid
+graph TD
+  PreviousSearchPage --> SearchMetadata
+  PreviousSearchPage --> SummaryCardList
+  SummaryCardList --> SummaryCard
 ```
 Component Hierarchy: Metadata + Summary Cards
 
@@ -1530,8 +1693,6 @@ sequenceDiagram
     API-->>Frontend: Return success message
     Frontend-->>User: Display account creation confirmation
 ```
-Sequence Diagram: Sign Up Form -> API -> User DB (INSERT)
-Class Diagram: User(id, email, password_hash, preferences, created_at)
 
 #### Unit test description
 
@@ -1588,7 +1749,6 @@ sequenceDiagram
     API-->>Frontend: Return success message
     Frontend-->>User: Display confirmation
 ```
-Sequence Diagram: Frontend -> API -> Feedback Table (INSERT)
 
 #### Unit test description
 
