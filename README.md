@@ -59,9 +59,39 @@ The goal of this project is to provide the design documents to turn this into a 
 ### Unit testing
 
 #### Frontend (React-based):
-    _* Use Jest and React Testing Library to test component rendering and interactability
-    _* Mock API responses and user actions
-    _* Validate routing, form inputs, conditional rendering, and responsiveness
+* Use Jest and React Testing Library to test component rendering and interactability
+* Mock API responses and user actions
+* Validate routing, form inputs, conditional rendering, and responsiveness
+
+#### Backend (Python/FastAPI):
+* Pytest for logic validation
+* Unittest.mock for mocking external dependencies
+* Test individual service functions, database access layers, and API endpoints
+
+#### Databases:
+* Insert, update, retrieve, and delete tests
+    * Implement rollback after each test as well
+* Verify constraints
+    * Constraints to consider: uniqueness, nullability, and foreign keys
+
+#### Database API & AI Integration
+* Mock PubMed API responses
+* Mock arXiv API responses
+* Mock PubMed API request
+* Mock arXiv API request
+* Validate summarization functions including structure and length
+* Ensure fallbacks behave during API timeouts or malformed inputs
+
+#### Automation and CI
+* Integrate all test suites into GitHub Actions to allow for CI/CD
+* Tests run automatically on pull requests
+* Code coverage tracked with Codecov
+
+#### Goals
+
+* Maintain >90% code coverage
+* Catch edge cases early in development
+* Enable refactoring easily
 
 ### Integration testing
 
