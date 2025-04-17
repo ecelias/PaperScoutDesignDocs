@@ -61,13 +61,13 @@ The goal of this project is to provide the design documents to turn this into a 
 Unit testing for PaperScout will focus on modular testing of both front and backend components in functional isolation. Each unit will be designed to have testable interfaces, mockable dependencies, and clear I/Os. By designing unit tests with this in mind, ensures that the most critical workflows for the system (user registraion, query submission, article summarization, and user notification) function properly against edge cases and integration errors. 
 
 #### Frontend (React-based):
-* Use Jest and React Testing Library to test component rendering and interactability
+* Use [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) to test component rendering and interactability
 * Mock API responses and user actions
 * Validate routing, form inputs, conditional rendering, and responsiveness
 
 #### Backend (Python/FastAPI):
-* Pytest for logic validation
-* Unittest.mock for mocking external dependencies
+* [Pytest](https://docs.pytest.org/en/stable/) for logic validation
+* [Unittest.mock](https://docs.python.org/3/library/unittest.mock.html) for mocking external dependencies
 * Test individual service functions, database access layers, and API endpoints
 
 #### Databases:
@@ -75,6 +75,7 @@ Unit testing for PaperScout will focus on modular testing of both front and back
     * Implement rollback after each test as well
 * Verify constraints
     * Constraints to consider: uniqueness, nullability, and foreign keys
+* Create model tests, view tests, form tests, and constraint tests for DJango with [Unittest.mock](https://docs.python.org/3/library/unittest.mock.html) 
 
 #### Database API & AI Integration
 * Mock PubMed API responses
@@ -84,20 +85,70 @@ Unit testing for PaperScout will focus on modular testing of both front and back
 * Validate summarization functions including structure and length
 * Ensure fallbacks behave during API timeouts or malformed inputs
 
-#### Automation and CI
+#### Automation and CI/CD
 * Integrate all test suites into GitHub Actions to allow for CI/CD
 * Tests run automatically on pull requests
-* Code coverage tracked with Codecov
+* Code coverage tracked with [Coveralls](https://coveralls.io/)
 
 #### Goals
-
 * Maintain >90% code coverage
 * Catch edge cases early in development
 * Enable refactoring easily
+* Focus on critical unit features (those with potential to alter system behavior)
+* Robust error handling by ensuring fallbacks exist and function correctly
 
 ### Integration testing
 
-_Describe the integration testing strategy for this project._
+Integration testing for PaperScout will focus on verifying correct interaction between key system componenets (i.e. frontend and backend, backend and external APIs, backend and databases) and ensuring fallback for any errors is correctly implemented. Integration tests should ensure all components function together as expected and mimic real-world workflows across multiple units within the system. 
+
+#### E2E testing
+* User workflow
+    * User sign-up and login
+    * Submit a new query
+    * Recieve summarized results
+    * Scheduler triggers updates and sends notifications
+    * User logout
+* Updates to queries are handled correctly
+* Deleted queries remove updates from scheduler but maintains search history
+* Users can optionally send feedback and have that properly handled by feedback DB and subsequently used to optimize article selection, summarization, and search terms.
+  
+#### Mock APIs as needed
+* Use live databases and backend logic
+* Stimulate PubMed/arXiv responses with controlled mock instances to ensure stability and reproducability
+    * Use [responses](https://pypi.org/project/responses/0.6.1/) to mock PubMed/arXiv endpoints
+
+#### Frontend-backend integration
+* Stimulate user interactions from browser to API using [Cypress](https://www.cypress.io/)
+* Validate network request payloads
+* Validate network responses
+* Validate network DOM updates
+
+#### Database validation
+* Ensure search history is updated when scheduler sends an update to user
+* Ensure scheduler prompts user for feedback and updates feedback database with appropriate query ID
+* Ensure scheduler entries are created when user creates a new query
+    * Ensure scheduler updates appropriately when a previous query is edited or deleted
+* Ensure all datases are updated correctly through integrated API endpoints
+* Create a PostgreSQL test DB to ensure proper backend integration
+
+#### AI pipeline
+* Test article selection relevance based on search terms
+* Test summarization acccuracy with predefined inputs
+* Check AI structure, content, and delivery logic
+* Check AI can access search terms, query results, and user feedback for appropriate queries
+
+#### Automation and CI/CD
+* Use GitHub Actions workflows for parallel execution of full frontend/backend stack
+* Run integration tests on major feature branches
+  
+#### Goals
+* Ensure stability and correctness of E2E, full-stack user journey
+* Catch errors missed by isolated unit tests
+* Validate third-party integrations function correctly
+* Validate robustness of ML modules
+* Improve overall system reliability
+* Ensure compatability between components
+  
 
 ## Requirements
 
@@ -110,6 +161,7 @@ _Functional requirements for a simple project should be phrased as usecases. Exa
 
 ### Non Functional Requirements
 
+* Can't spend any money on tools 
 _Non functional requirements should be listed_
 _Ex:_
 _* Needs to run on the cluster_
