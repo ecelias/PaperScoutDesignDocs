@@ -154,20 +154,43 @@ Integration testing for PaperScout will focus on verifying correct interaction b
 
 ### Functional Requirements
 
-_Functional requirements for a simple project should be phrased as usecases. Example can be found in docs._
-
-**Note that mermaid doesn't support usecase diagrams you need to use another tool(draw.io, plantUML) until [this issue](https://github.com/mermaid-js/mermaid/issues/4628) is resolved.**
-
+1. User Registration, User Authentication
+   * Use Case: Allow users to create an account using a unique email and secure password
+   * Use Case: Enable users to log in and out of their account securely
+2. Profile Management
+   * Use Case: Allows users to update personal information
+   * Use Case: enables users to update delivery method information (email/SMS)
+3. Search Query Submission
+   * Use Case: Allows user to input required and preferred search terms related to their research field
+   * Use Case: Allows users to receive an AI generated query based on research interests
+   * Use Case: Allows users to fully or partially opt out of AI integration
+   * Use Case: Allows users to input a full search query
+   * Use Case: Provides suggestions for additional relevant search terms
+   * Use Case: Allows users to set preferences for update frequency and delivery method for a search query
+   * Use Case: Allows users to delete and edit queries
+   * Use Case: Allows users to view past articles retrieved and past searches run
+4. Automated Literature Retrieval
+   * Use Case: System accesses PubMed and/or arXiv databases based on user defined search terms and retrieves relevant articles
+   * Use Case: System determines correct number of relevant articles (based on user preferences) for user update. Relevance is determined based on provided search query and ay user feedback provided.
+   * Use Case: System generates AI-based summaries for each retrieved article
+   * Use Case: Articles selected for delivery are formatted in a user-friendly manner and sent to user by preferred delivery method
+5. Update Delivery
+   * Use Case: Users are sent updates containing a specific number of article summaries via their preferred delivery method on a user-defined schedule
+   * Use Case: Includes links to full articles in updates and options to provide feedback on relevance of results and relevance of AI-generated summary
+6. Search Strategy Transparency
+    * Use Case: Allows users to view the specific search strategy that was used for each update
+7. User Feedback
+   * Use Case: Users are prompted to provide optional feedback on the accuracy and relevance of search results
+   * Use Case: System uses feedback to refine future search strategies, improve result relevance, and improve article summarization
 
 ### Non Functional Requirements
 
-* Can't spend any money on tools 
-_Non functional requirements should be listed_
-_Ex:_
-_* Needs to run on the cluster_
-_* Needs to run on windows_
-_* Can't spend money on tools_
-
+1. User interface should be intuitive and accessible
+2. All user data should be encrypted at rest and in transit
+3. Robust authentication mechanisms should be implemented to prevent unathorized access
+4. System should process and deliver updates within 2 minutes of scheduled time
+5. Only open-source tools and frameworks should be used to avoid licensing costs.
+   
 ## Technologies
 
 ### Languages
