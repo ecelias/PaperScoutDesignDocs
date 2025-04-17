@@ -170,17 +170,61 @@ _* Can't spend money on tools_
 
 ## Technologies
 
-### Languages/Frameworks
+### Languages
 
-_Describe what languages/Frameworks are going to be used in the project. Include links to the languages/Frameworks and setup instructions. Include the reasons you're picking the languages/Frameworks (it's absolutely fine to pick a language because you already know how to work with it)._
+#### Python: Backend development, scripting, AI integration
+* [Python](https://www.python.org/)
+* Setup: <code>brew install python3</code> (macOS)
+    * Use <code>venv</code> for virutal environment setup
+* Reason for selection: Developer is very familiar with the language, it is widely used for ML, and supports FastAPI
+  
+#### JavaScript (React): Frontend development
+* [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* Setup: <code>npx create-react-app paperscout</code>
+* Reason for selection: Built for dynamic and interactive web applications, rendering is efficient, and is designed to be easy to test. Expect it to also integrate smoothly with REST APIs and known for component-based flexbility. 
+  
+#### SQL (SQLite for Dev, PostgreSQL for Prod): Database design
+* [SQLite](https://sqlite.org/), [PostgreSQL](https://www.postgresql.org/)
+* Setup: <code>brew install sqlite</code> (macOS)
+* Reason for selection: Developer familiarity with language, PostgreSQL is scalable and secure
+
+### Frameworks
+
+#### FastAPI
+* [FastAPI](https://fastapi.tiangolo.com/)
+* Setup: <code>pip install "fastapi[all]" uvicorn</code>
+* Reason for selection: Flexibility, supports asyncohonization, based on standard python type hints
+
+#### React
+* React: [React](https://react.dev/)
+* Setup: <code>npx create-react-app paperscout</code>
+* Reason for selection: User familiarity and component-based flexbility
 
 #### Style Guide
-
-_Pick a style guide from the internet that includes an autoformatter link that here and use it._
+<strong>Python:</strong> [PEP 8](https://peps.python.org/pep-0008/)
+    Autoformatter: [autopep8](https://pypi.org/project/autopep8/) 
+<strong>JS/React:</strong> [AirBnB](https://airbnb.io/javascript/react/)
+    Autoformatter: [prettier](https://www.npmjs.com/package/prettier)
 
 ### Tools
 
-_Describe tools (IDE, Debugger, build tools, test framework) you'll use in the project. At a minimum this should include your version control tooling._
+IDE: VSCode with Python + React plugins <p>
+Version Control: Git, GitHub <p>
+Debugger: VSCode Debug Console, [ipdb](https://pypi.org/project/ipdb/) <p>
+Dev Tools: [Chrome Dev Tools](https://developer.chrome.com/docs/devtools) <p>
+Messaging:[Email with Postmark](https://postmarkapp.com/lp/postmark-email-api?utm_source=google&utm_medium=cpc&utm_campaign=Postmark_Google_Search_Non_NORTHAM&utm_adgroup=Dev_Languages&utm_term=python%20email&gad_source=1&gclid=Cj0KCQjwqv2_BhC0ARIsAFb5Ac9cp3TYZI4Ws19WmbI7WXwAd84Z6FkKoe-2NpT0yE0HgDHyZPZKHuUaAqMoEALw_wcB), [SMS with Plivo](https://www.plivo.com/) <p>
+Task Scheduler: [Celery](https://github.com/celery/celery), [Redis](https://github.com/redis/redis-py) <p>
+External APIs: [PubMed E-utilities](https://www.ncbi.nlm.nih.gov/books/NBK3837/), [arXIV API](https://info.arxiv.org/help/api/index.html), [OpenAI GPT-4](https://openai.com/index/gpt-4-api-general-availability/) <p>
+Testing Frameworks:
+* Frontend Unit Testing: [Jest](https://jestjs.io/), [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) 
+* Backend Unit Testing: [Pytest](https://docs.pytest.org/en/stable/), [Unittest.mock](https://docs.python.org/3/library/unittest.mock.html) 
+* Integration Testing: [Pytest](https://docs.pytest.org/en/stable/), [FastAPI TestClient](https://fastapi.tiangolo.com/reference/testclient/)
+* E2E Testing: [Cypress](https://www.cypress.io/)
+
+Coverage: [Coveralls](https://coveralls.io/) <p>
+CI/CD: [GitHub Actions](https://github.com/features/actions) <p>
+Containerization: [Docker](https://www.docker.com/) <p>
+Cloud Hosting (budget dependent): [Render](https://render.com/) <p>
 
 # Design and Documentation
 
