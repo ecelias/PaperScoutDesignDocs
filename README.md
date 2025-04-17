@@ -58,6 +58,8 @@ The goal of this project is to provide the design documents to turn this into a 
 
 ### Unit testing
 
+Unit testing for PaperScout will focus on modular testing of both front and backend components in functional isolation. Each unit will be designed to have testable interfaces, mockable dependencies, and clear I/Os. By designing unit tests with this in mind, ensures that the most critical workflows for the system (user registraion, query submission, article summarization, and user notification) function properly against edge cases and integration errors. 
+
 #### Frontend (React-based):
 * Use Jest and React Testing Library to test component rendering and interactability
 * Mock API responses and user actions
