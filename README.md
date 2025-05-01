@@ -1844,7 +1844,55 @@ sequenceDiagram
 
 # Integration tests
 
-_List the integration tests for the system._
+### User Authentication Flow
+Test Case: Verify that a user can successfully sign up and then log in.
+
+Steps:
+1. Submit valid user details to the sign-up API.
+2. Attempt to log in with the newly created credentials.
+3. Confirm access to protected routes post-login.
+   
+Expected Result: User is able to sign up, log in, and access protected resources.​
+
+### Profile Management and Scheduler Integration
+Test Case: Ensure that updating user profile preferences affects the scheduler settings appropriately.
+
+Steps:
+1. Update user preferences (e.g., delivery method, frequency).
+2. Check that scheduler entries reflect the updated preferences.
+
+Expected Result: Scheduler updates align with the new user preferences.​
+
+### Search Query Submission and History Recording
+Test Case: Validate that submitting a new search query records the query in the search history.
+
+Steps:
+1. Submit a new search query via the frontend.
+2. Verify that the search history database logs the query with correct metadata.
+
+Expected Result: Search query is recorded with accurate details in the search history.​
+
+4. Automated Literature Retrieval and Update Delivery
+Test Case: Confirm that the system retrieves relevant articles based on user-defined search terms and delivers updates as per user preferences.
+
+Steps:
+
+1. Trigger the scheduler for a user-defined search query.
+2. Ensure articles are fetched from external databases (e.g., PubMed, arXiv).
+3. Verify that the user receives an update containing article summaries via the preferred delivery method.
+
+Expected Result: User receives timely updates with relevant article summaries.​
+
+### Feedback Submission and Utilization
+Test Case: Ensure that user feedback on search results is recorded and utilized to refine future search strategies.
+
+Steps:
+
+1. Submit feedback on the relevance of search results.
+2. Check that feedback is stored in the feedback database.
+3. Verify that future searches consider past feedback for improved relevance.
+
+Expected Result: Feedback is recorded and influences subsequent search results.
 
 # Resources
 
