@@ -47,7 +47,7 @@ Use [Semantic Versioning](https://semver.org/) in standard <code>MAJOR.MINOR.PAT
 3. PATCH version when you make backward compatible bug fixes
 
 ## Project Structure
-
+```
 project-root/
 ├── source/
 │   ├── unit-01-landing-page/
@@ -139,6 +139,7 @@ project-root/
 ├── .gitignore
 ├── README.md
 └── package.json
+```
 
 ## Define a unit
 
