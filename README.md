@@ -48,12 +48,97 @@ Use [Semantic Versioning](https://semver.org/) in standard <code>MAJOR.MINOR.PAT
 
 ## Project Structure
 
-_Describe the file/directory structure of the project_
-**No directory or file shall contain: ' ' or a capital letter.**
-**- source: contains all source code for the project. Each unit in it's own directory**
-**- test: contains all the test code for the project. **
-**- test/unit_test: contains all the unit test code for the project. Each unit in it's own directory**
-**- test/integration_test: contains all the integration test code for the project. Each test in it's own directory**
+project-root/
+├── source/
+│   ├── unit-01-landing-page/
+│   ├── unit-02-about-app-page/
+│   ├── unit-03-about-developer-page/
+│   ├── unit-04-sign-up-page/
+│   ├── unit-05-login-page/
+│   ├── unit-06-user-dashboard/
+│   ├── unit-07-user-profile/
+│   ├── unit-08-search-history-page/
+│   ├── unit-09-new-query-page/
+│   ├── unit-10-previous-search-page/
+│   ├── unit-21-search-history/
+│   ├── unit-22-user-feedback/
+│   ├── unit-23-update-notifications/
+│   ├── unit-24-pubmed-api/
+│   ├── unit-25-arxiv-api/
+│   ├── unit-26-article-selection-summarization/
+│   ├── unit-27-search-query-optimization/
+│   ├── unit-28-update-formatting/
+│   ├── unit-29-admin-capabilities/
+│   ├── unit-30-access-scheduler-db/
+│   ├── unit-31-access-user-db/
+│   ├── unit-32-access-search-history-db/
+│   ├── unit-33-access-feedback-db/
+│   ├── unit-34-update-scheduler-db/
+│   ├── unit-35-update-user-db/
+│   ├── unit-36-update-search-history-db/
+│   ├── unit-37-update-feedback-db/
+│   ├── unit-38-encrypt-password/
+│   ├── unit-39-create-scheduler-item/
+│   ├── unit-40-create-user/
+│   ├── unit-41-create-search-history-item/
+│   └── unit-42-create-feedback-item/
+├── test/
+│   ├── unit_test/
+│   │   ├── unit-01-landing-page/
+│   │   ├── unit-02-about-app-page/
+│   │   ├── unit-03-about-developer-page/
+│   │   ├── unit-04-sign-up-page/
+│   │   ├── unit-05-login-page/
+│   │   ├── unit-06-user-dashboard/
+│   │   ├── unit-07-user-profile/
+│   │   ├── unit-08-search-history-page/
+│   │   ├── unit-09-new-query-page/
+│   │   ├── unit-10-previous-search-page/
+│   │   ├── unit-21-search-history/
+│   │   ├── unit-22-user-feedback/
+│   │   ├── unit-23-update-notifications/
+│   │   ├── unit-24-pubmed-api/
+│   │   ├── unit-25-arxiv-api/
+│   │   ├── unit-26-article-selection-summarization/
+│   │   ├── unit-27-search-query-optimization/
+│   │   ├── unit-28-update-formatting/
+│   │   ├── unit-29-admin-capabilities/
+│   │   ├── unit-30-access-scheduler-db/
+│   │   ├── unit-31-access-user-db/
+│   │   ├── unit-32-access-search-history-db/
+│   │   ├── unit-33-access-feedback-db/
+│   │   ├── unit-34-update-scheduler-db/
+│   │   ├── unit-35-update-user-db/
+│   │   ├── unit-36-update-search-history-db/
+│   │   ├── unit-37-update-feedback-db/
+│   │   ├── unit-38-encrypt-password/
+│   │   ├── unit-39-create-scheduler-item/
+│   │   ├── unit-40-create-user/
+│   │   ├── unit-41-create-search-history-item/
+│   │   └── unit-42-create-feedback-item/
+│   └── integration_test/
+│       ├── test-01-user-authentication/
+│       ├── test-02-profile-management/
+│       ├── test-03-search-query-submission/
+│       ├── test-04-automated-literature-retrieval/
+│       ├── test-05-update-delivery/
+│       ├── test-06-search-strategy-transparency/
+│       └── test-07-user-feedback/
+├── docs/
+│   ├── architecture/
+│   ├── api/
+│   └── user-guides/
+├── scripts/
+│   ├── build/
+│   ├── deploy/
+│   └── test/
+├── config/
+│   ├── development/
+│   ├── staging/
+│   └── production/
+├── .gitignore
+├── README.md
+└── package.json
 
 ## Define a unit
 
