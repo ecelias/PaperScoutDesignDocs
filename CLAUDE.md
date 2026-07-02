@@ -1,4 +1,4 @@
-# AGENTS.md
+# CLAUDE.md
 
 # Repository Instructions for AI Coding Agents
 
